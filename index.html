@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="main.css" />
+<script src="script.js" type="text/javascript"></script>
+    <head>
+        <title>The World</title>
+        
+        <!-- JavaScript for Tic Tac Toe -->
+        
+        <script type="text/javascript">
+            
+            var painted;
+            var content;
+            var winningCombos;
+            var turn = 0;
+            var theCanvas;
+            var c;
+            var cxt;
+            var squaresLlenados = 0;
+            var w;
+            var y;
+
+            window.onload = function() {
+
+                painted = new Array();
+                content = new Array();
+                winningCombos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+                for(var l = 0; l <= 8; l++) {
+                    painted[l] = false;
+                    content[l] = '';
+                }
+            }
+
+            function canvasClicked(canvasNumber) {
+                theCanvas = "canvas"+canvasNumber;
+                c = document.getElementById(theCanvas);
+                cxt = c.getContext("2d");
+                
+                if(painted[canvasNumber-1] ==false) {
+                    if(turn%2==0) {
+                        cxt.beginPath();
+                        cxt.moveTo(10,10);
+                        cxt.lineTo(40,40);
+                        cxt.moveTo(40,10);
+                        cxt.lineTo(10,40);
+                        cxt.stroke();
+                        cxt.closePath();
+                        content[canvasNumber-1] = 'X';
+                    } else {
+                        cxt.beginPath();
+                        cxt.arc(25,25,20,0,Math.PI*2,true);
+                        cxt.stroke();
+                        cxt.closePath();
+                        content[canvasNumber-1] = 'O';
+                    }
+                    
+                    turn++;
+                    painted[canvasNumber-1] = true;
+                    squaresLlenados++;
+                    checkWinners(content[canvasNumber - 1]);
+                    
+                    if(squaresLlenados==9) {
+                        alert("Game Over!");
+                        location.reload;
+                    }
+                } else {
+                    alert("Sorry, there's something there already!");
+                }
+            }
+                    
+            function checkWinners(symbol) {
+                for(var t = 0; t < winningCombos.length; t++) {
+                    if(content[winningCombos[t][0]]==symbol&&content[winningCombos[t][1]]==symbol && content[winningCombos[t][2]]==symbol) {
+                        alert(symbol + " Won the game");
+                        restart();
+                    } 
+                }
+            }
+                    
+            function restart() {
+                y = confirm("Would you like to play again?");
+                        
+                if(y == true) {
+                    alert("Sure thing! Good luck!");
+                    location.reload(true);
+                } else {
+                    alert("See you next time!");
+                    location.reload(true);
+                }
+            }
+            
+        </script>
+        
+    </head>
+    
+    <body>
+        
+        <!-- Navigation Bar -->
+        
+        <div class="nav">
+            <a class="active" href="#header">Home</a>
+            <a href="#tictactoe">Tic Tac Toe</a>
+            <a href="#caltop">Calculator</a>
+            <a href="#stopperTop">Stopper</a>
+        </div>
+        
+        <!-- CSS (for image) -->
+        
+        <style>
+            
+            .container {
+                position: relative;
+            }
+
+            .center {
+                position: absolute;
+                top: 30%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 30px;
+                color: blue;
+            }
+
+            img { 
+                width: 100%;
+                height: 100%;
+            }
+            
+        </style>
+        
+        <!-- Opening image -->
+        
+        <div id="header"></div>
+        <div class="container">
+          <img src="http://2.bp.blogspot.com/-U4figlm1-Dw/UN5LhH8DWsI/AAAAAAAAARw/-8t2orsCjV0/s1600/asdf+3.JPG" alt="Rainbow" />
+              <div class="center"><strong>The World we live in</strong></div>
+        </div>
+        
+        <!-- Tic Tac Toe -->
+        
+        <br>
+        <div id="tictactoe">
+            <h1>Tic Tac Toe</h1>
+            <h3>Who will win?</h3>
+        </div>
+        
+        <div id="box"  class="tictactoe">
+            
+            <canvas id = "canvas1"  width="50" height="50" style="border:1px solid red" onclick="canvasClicked(1)"></canvas>
+
+            <canvas id = "canvas2"  width="50" height="50" style="border:1px solid orange" onclick="canvasClicked(2)"></canvas>
+
+            <canvas id = "canvas3"  width="50" height="50" style="border:1px solid yellow" onclick="canvasClicked(3)"></canvas><br/>
+
+            <canvas id = "canvas4"  width="50" height="50" style="border:1px solid green" onclick="canvasClicked(4)"></canvas>
+
+            <canvas id = "canvas5"  width="50" height="50" style="border:1px solid cyan" onclick="canvasClicked(5)"></canvas>
+
+            <canvas id = "canvas6"  width="50" height="50" style="border:1px solid blue" onclick="canvasClicked(6)"></canvas><br/>
+
+            <canvas id = "canvas7"  width="50" height="50" style="border:1px solid magenta" onclick="canvasClicked(7)"></canvas>
+
+            <canvas id = "canvas8"  width="50" height="50" style="border:1px solid purple" onclick="canvasClicked(8)"></canvas>
+
+            <canvas id = "canvas9"  width="50" height="50" style="border:1px solid brown" onclick="canvasClicked(9)"></canvas>
+            
+        </div>
+        <br><br><br>
+            
+        <!-- Calculator -->
+        
+        <div id="caltop">
+            <h1>Calculator</h1>
+            <h3>Don't divide by zero!</h3>
+        </div>
+        <br>
+        
+        <div id="calculator" class="calculator">
+                
+            <button id="clear" class="clear" >C</button>
+            <button class="ops" data-ops="power!!!">:)</button>
+            <button class="ops" data-ops="scifi">?</button>
+            <button class="ops" data-ops="porlocierto">%</button>
+            <button class="ops" data-ops="vamonos" id="superdupermola" style="position: absolute; left: 17%;">!</button>
+            
+            <br><br>
+            
+            <div id="author" class="author">0</div>
+            
+            <button class="num" data-num="7">7</button>
+            <button class="num" data-num="8">8</button>
+            <button class="num" data-num="9">9</button>
+            <button class="ops" data-ops="plus">+</button>
+            <button class="ops" data-ops="root" id="superdupermola" id="superdupermola" style="position: absolute; left: 31%; transform: rotate(10deg);">√</button>
+            <button class="ops" data-ops="randomiser" id="superdupermola" style="position: absolute; right: 10%; transform: rotate(15deg); width: 5.5em;">randomiser</button>
+            
+            <button class="num" data-num="4">4</button>
+            <button class="num" data-num="5">5</button>
+            <button class="num" data-num="6">6</button>
+            <button class="ops" data-ops="minus">-</button>
+            <button class="ops" data-ops="log" id="superdupermola" style="position: absolute; right: 77%; transform: rotate(39deg);">log</button>
+            <button class="ops" data-ops="sin" id="superdupermola" style="position: absolute; right: 30%; transform: rotate(15deg);">sin</button>
+            
+            <button class="num" data-num="1">1</button>
+            <button class="num" data-num="2">2</button>
+            <button class="num" data-num="3">3</button>
+            <button class="ops" data-ops="times">*</button>
+            <button class="ops" data-ops="gimatriayay" id="superdupermola" style="position: absolute; right: 1%; transform: rotate(5deg);">√</button>
+            <button class="ops" data-ops="cos" id="superdupermola" style="position: absolute; right: 88%; transform: rotate(15.2deg);">cos</button>
+            
+            <button class="num" data-num="0">0</button>
+            <button class="num" data-num=".">.</button>
+            <button id="equals" class="equals" data-result="">=</button>
+            <button class="ops" data-ops="divided by">/</button>
+            <button class="ops" data-ops="root" id="superdupermola" style="position: absolute; left: -5%; transform: rotate(70deg);">√</button>
+            <button class="ops" data-ops="tan" id="superdupermola" style="position: absolute; right: 2%; transform: rotate(100deg);">tan</button>
+            
+            
+        </div>
+        
+        <div id="calbottom">
+
+            <br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <p>This calculator provides <strong>you</strong> with all of the latest improvements in calculators from around the world, <br> including, but not limited to: <em>addition</em>, <em>subtraction</em>, <em>multiplication</em> and <em>division</em>...</p>
+            
+        </div>
+        
+        <script>
+
+                (function() {
+                  "use strict";
+
+                  var el = function(element) {
+                    if (element.charAt(0) === "#") { 
+                      return document.querySelector(element); 
+                    }
+
+                    return document.querySelectorAll(element); 
+                  };
+
+                  var author = el("#author"), 
+                    equals = el("#equals"), 
+                    nums = el(".num"), 
+                    ops = el(".ops"), 
+                    currentNum = "", 
+                    oldNum = "", 
+                    resultNum, 
+                    operator; 
+
+                  var setNum = function() {
+                    if (resultNum) { 
+                      currentNum = this.getAttribute("data-num");
+                      resultNum = "";
+                    } else { 
+                      currentNum += this.getAttribute("data-num");
+                    }
+                    author.innerHTML = currentNum; 
+                  };
+
+                  var moveNum =     function() {
+                    oldNum = currentNum;
+                    currentNum = "";
+                    equals.setAttribute("data-result", ""); 
+                  };
+                    
+                  var displayNum = function() {
+
+                    // Convert string input to numbers
+                    oldNum = parseFloat(oldNum);
+                    currentNum = parseFloat(currentNum);
+
+                    // Perform operation
+                    switch (operator) {
+                        case "plus":
+                            resultNum = oldNum + currentNum;
+                            break;
+
+                        case "minus":
+                            resultNum = oldNum - currentNum;
+                            break;
+
+                        case "times":
+                            resultNum = oldNum * currentNum;
+                            break;
+
+                        case "divided by":
+                            resultNum = oldNum / currentNum;
+                            break;
+                        
+                        case "power!!!":
+                            resultNum = Math.pow(oldNum, currentNum);
+                            break;
+                            
+                        case "scifi":
+                            var decimal = oldNum; 
+                            decimal = parseFloat(decimal);
+
+                            var e = decimal.toExponential();
+                            var a = e;
+                            var b = 0;
+                                
+                            var i = e.indexOf('e');
+                            if (i != -1) {
+                                a = e.substring(0, i);
+                                b = e.substring(i + 1, e.length);
+                            }
+                      
+                            b = parseInt(b);
+                            
+                            resultNum = a + " x 10 ^ " + b;
+                            break;
+                            
+                        case "porlocierto":
+                            resultNum = oldNum / 100;
+                            break;
+                            
+                        case "vamonos":
+                            function factorial(num) {
+                                if (num === 0) { return 1; } else {
+                                    return num * factorial( num - 1);
+                                }
+                            }
+                            resultNum = factorial(oldNum);
+                            break;
+                            
+                        case "root":
+                            resultNum = Math.pow(oldNum, 1/currentNum);
+                            break;
+                            
+                        case "log":
+                            resultNum = "10 ^ " + Math.log10(oldNum);
+                            break;
+                            
+                        case "sin":
+                            resultNum = Math.sin(oldNum);
+                            break;
+                            
+                        case "cos":
+                            resultNum = Math.cos(oldNum);
+                            break;
+                            
+                        case "tan":
+                            resultNum = Math.tan(oldNum);
+                            break;
+                            
+                        case "randomiser":
+                            resultNum = Math.random();
+                            resultNum = resultNum.toFixed(2);
+                            break;
+                            
+                        default:
+                            resultNum = currentNum;
+                    }
+
+                //    if (!isFinite(resultNum)) {
+                //      if (isNaN(resultNum)) { 
+                //        resultNum = "You broke it!";
+                //      } else { 
+                //          resultNum = "Error!"
+                //      }
+                //    }
+
+                    author.innerHTML = resultNum;
+                    equals.setAttribute("data-result", resultNum);
+
+                    oldNum = 0;
+                    currentNum = resultNum;
+
+                  };
+                    
+                  var clearAll = function() {
+                    oldNum = "";
+                    currentNum = "";
+                    author.innerHTML = "0";
+                    equals.setAttribute("data-result", resultNum);
+                  };
+                                      
+                  for (var i =  0, l = nums.length; i < l; i++) {
+                    nums[i].onclick = setNum;
+                  }
+
+                  for (var i = 0, l = ops.length; i < l; i++) {
+                    ops[i].onclick = moveNum;
+                  }
+
+                  equals.onclick = displayNum;
+
+                  el("#clear").onclick = clearAll;
+                   
+                }());
+            
+        </script>
+        
+        <!-- Count up timer -->
+        
+        <div class="count_up_timer">
+            
+            <img src="https://st2.depositphotos.com/1005076/8375/i/950/depositphotos_83753346-stock-photo-path-in-the-forset.jpg" alt="forest" />
+            <div class="center_counter">
+                
+                <h5>You have already spent </h5>
+                <label id="minutes">00</label> minutes and <label id="seconds">00</label> seconds
+                <h5> in this awesome website!</h5>
+                
+            </div>
+            
+        </div>
+        
+        <script>
+            
+            window.onload=function() {
+                        
+                var minLabel = document.getElementById("minutes");
+                var secLabel = document.getElementById("seconds");
+                var totalsec = 0;
+                setInterval(setTime, 1000);
+
+                function setTime() {
+                    ++totalsec;
+                    secLabel.innerHTML = pad(totalsec % 60);
+                    minLabel.innerHTML = pad(parseInt(totalsec / 60));
+                }
+
+                function pad(val) {
+                    var valString = val + "";
+                    if (valString.length < 2) {
+                        return "0" + valString;
+                    } else {
+                        return valString;
+                    }
+                }
+            }
+                    
+        </script><br>
+        
+        <!-- Count down stopper -->
+        
+        <div id="stopperTop">
+        
+            <h1>Count Down Stopper</h1>
+            <h3>Ready, set, go!</h3>
+            <br>
+            
+        </div>
+                
+        <div class="count_down_stopper">
+        
+            <button id="pause" class="pause" onclick="clearInterval(cStopper);">Pause</button>
+            
+            <button class="starter" id="starter" onclick="stopper(); document.getElementById('stopperDisplay').innerHTML=c;">Go!</button><br>
+            
+            <p id="stopperDisplay" class="stopperDisplay">0</p>
+            <br><br>
+            
+            <button class="up" data-up="up" onclick="c++; document.getElementById('stopperDisplay').innerHTML=c;">+</button>
+            
+            <button class="down" data-down="down" onclick="c--; document.getElementById('stopperDisplay').innerHTML=c;">-</button>
+            
+            <button class="restart" id="restart" onclick="c=0; document.getElementById('stopperDisplay').innerHTML=c;">Restart</button>
+            
+        </div>
+        
+        <script>
+        
+            var cStopper;
+            var c = 0;
+            
+                function stopper() {
+                    cStopper = setInterval(myStopper, 1000);
+                    document.getElementById("stopperDisplay").innerHTML = c;
+                    
+                    function myStopper() {
+                        document.getElementById("stopperDisplay").innerHTML = --c;
+                        if (c == 0) {
+                            clearInterval(cStopper);
+                            alert("Your time is up!");
+                        }
+                    }
+                }
+            
+        </script>
+        
+        <!-- Map Game -->
+        
+        <div class="mapGame">
+            
+            <!--
+            <br><br><br><br><br><br>
+            
+            <div class="map" onclick="coordinates(event)" >
+            <img src="http://www.mapsland.com/maps/world/large-contour-political-map-of-the-world.jpg" alt="map" />
+                </div>
+            <h2 id="map">0</h2>
+            
+            <script>
+                var rect = Element.getBoundingClientRect();
+                console.log(rect.topp, rect.right, rect.bottom, rect.left);
+                
+                var bodyRect = document.body.getBoundingClientRect(),
+                elemRect = element.getBoundingClientRect(),
+                offset   = elemRect.top - bodyRect.top;
+
+                alert('Element is ' + offset + ' vertical pixels from <body>');
+            </script>
+            -->
+            <!--
+            <script>
+                function coordinates(event) {
+                    var x = event.clientX;
+                    var y = event.clientY;
+                    var coords = "x: " + x + ", y: " + y;
+                    document.getElementById('map').innerHTML = coords;
+                }
+            </script>
+            -->
+            <!--
+            <canvas id="mapCanvas" width="500" height="500" style="border: 1px solid blue"></canvas>
+            <p id="xtest" class="xtest">0</p>
+            <p id="ytest" class="ytest">0</p>
+            
+            <script>
+            
+                myCanvas = document.getElementById('mapCanvas');
+                myCanvas.addEventListener('click', on_canvas_click, false);
+                
+                function on_canvas_click(event) {
+                    var x = event.clientX;
+                    var y = event.clientY;
+                    
+                    document.getElementById('xtest').innerHTML = x;
+                    document.getElementById('ytest').innerHTML = y;
+                    
+                }
+            
+            </script>
+-->
+        
+        </div>
+        
+        <!-- Watch -->
+        
+        <div class="clock">
+        
+            <br><br><br><br>
+            <canvas id="clockcanvas" width="100" height="100" style="background-color: aqua"></canvas>
+        
+        </div>
+        
+        <script>
+        
+            var clockCanvas = document.getElementById("clockcanvas");
+            var ctx = clockCanvas.getContext("2d");
+            var radius = clockCanvas.height / 2;
+            ctx.translate(radius, radius);
+            radius = radius * 0.90;
+            setInterval(drawClock, 1000);
+            
+            function drawClock() {
+                drawFace(ctx, radius);
+                drawNumbers(ctx, radius);
+                drawTime(ctx, radius);
+            }
+            
+            function drawFace(ctx, radius) {
+                var gradient;
+                
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+                
+                gradient = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+                gradient.addColorStop(0, "rgb(21, 207, 251)");
+                gradient.addColorStop(0.5, "rgb(41, 19, 253)");
+                gradient.addColorStop(1, "indigo");
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = radius * 0.1;
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+                ctx.fillStyle = 'indigo';
+                ctx.fill();
+            }
+            
+            function drawNumbers(ctx, radius) {
+                var ang;
+                var num;
+                ctx.font = radius * 0.20 + "px arial";
+                ctx.textBaseline = "middle";
+                ctx.textAlign = "center";
+                for (num = 1; num <= 12; num++) {
+                    ang = num *  Math.PI / 6;
+                    ctx.rotate(ang);
+                    ctx.translate(0, -radius * 0.85);
+                    ctx.rotate(-ang);
+                    ctx.fillText(num.toString(), 0, 0);
+                    ctx.rotate(ang);
+                    ctx.translate(0, radius * 0.85);
+                    ctx.rotate(-ang);
+                }
+            }
+            
+            function drawTime(ctx, radius) {
+                var now = new Date();
+                var hour = now.getHours();
+                var minute = now.getMinutes();
+                var second = now.getSeconds();
+                
+                hour = hour % 12;
+                hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));
+                drawHand(ctx, hour, radius * 0.5, radius * 0.08);
+                
+                minute = (minute * Math.PI / 30) + (minute * Math.PI / (30 * 60));
+                drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+                
+                second = (second * Math.PI / 30);
+                drawHand(ctx, second, radius * 0.9, radius * 0.03);
+            }
+            
+            function drawHand(ctx, pos, length, width) {
+                ctx.beginPath();
+                ctx.lineWidth = width;
+                ctx.lineCap = "round";
+                ctx.moveTo(0,0);
+                ctx.rotate(pos);
+                ctx.lineTo(0, -length);
+                ctx.stroke();
+                ctx.rotate(-pos);
+            }
+        
+        </script>
+        
+        <!-- גימטריה -->
+        
+        <div class="Gimatria">
+            
+            <div id="myauthor" class="myauthor">0</div>
+            
+            
+            <br><br>
+                                                                          
+            <button class="myletter" data-myletter="myg" style="color: goldenrod;">ז</button>       
+            <button class="myletter" data-myletter="myf" style="color: goldenrod;">ו</button>   
+            <button class="myletter" data-myletter="mye" style="color: goldenrod;">ה</button> 
+            <button class="myletter" data-myletter="myd" style="color: goldenrod;">ד</button> 
+            <button class="myletter" data-myletter="myc" style="color: goldenrod;">ג</button>
+            <button class="myletter" data-myletter="myb" style="color: goldenrod;">ב</button>  
+            <button class="myletter" data-myletter="mya" style="color: goldenrod;">א</button>
+            <button class="myletter" data-myletter="myn" style="color: goldenrod;">מ</button>
+            <button class="myletter" data-myletter="mym" style="color: goldenrod;">ל</button> 
+            <button class="myletter" data-myletter="myl" style="color: goldenrod;">ך</button> 
+            <button class="myletter" data-myletter="myk" style="color: goldenrod;">כ</button>     
+            <button class="myletter" data-myletter="myj" style="color: goldenrod;">י</button>    
+            <button class="myletter" data-myletter="myi" style="color: goldenrod;">ט</button> 
+            <button class="myletter" data-myletter="myh" style="color: goldenrod;">ח</button>   
+            <button class="myletter" data-myletter="myu" style="color: goldenrod;">צ</button>
+            <button class="myletter" data-myletter="myt" style="color: goldenrod;">פ</button>     
+            <button class="myletter" data-myletter="mys" style="color: goldenrod;">ע</button> 
+            <button class="myletter" data-myletter="myr" style="color: goldenrod;">ס</button> 
+            <button class="myletter" data-myletter="myq" style="color: goldenrod;">ן</button> 
+            <button class="myletter" data-myletter="myp" style="color: goldenrod;">נ</button> 
+            <button class="myletter" data-myletter="myo" style="color: goldenrod;">ם</button>  
+            <button id="myclear" class="myclear" style="background-color: goldenrod;">C</button>
+            <button id="myequals" class="myequals" data-myresult="" style="background-color: goldenrod;">=</button>          
+            <button class="myletter" data-myletter="myz" style="color: goldenrod;">ת</button>   
+            <button class="myletter" data-myletter="myy" style="color: goldenrod;">ש</button> 
+            <button class="myletter" data-myletter="myx" style="color: goldenrod;">ר</button>  
+            <button class="myletter" data-myletter="myw" style="color: goldenrod;">ק</button> 
+            <button class="myletter" data-myletter="myv" style="color: goldenrod;">ץ</button>  
+        
+        </div>
+        
+        
+        <script>
+
+            (function() {
+                "use strict";
+
+                var el = function(element) {
+                    if (element.charAt(0) === "#") { 
+                    return document.querySelector(element); 
+                }
+
+                    return document.querySelectorAll(element); 
+                };
+
+                var myauthor = el("#myauthor"), 
+                    myequals = el("#myequals"), 
+                    myletter = el(".myletter"), 
+                    currentWord = "", 
+                    oldWord = "", 
+                    resultWord;
+
+                var setWord = function() {
+                    if (resultWord) { 
+                        currentWord = this.getAttribute("data-myletter");
+                        resultWord = "";
+                    } else { 
+                        currentWord += this.getAttribute("data-myletter");
+                    }
+                
+                    myauthor.innerHTML = currentWord; 
+                };
+
+                var moveWord = function() {
+                    oldWord = currentWord;
+                    currentWord = "";
+                    myequals.setAttribute("data-myresult", ""); 
+                };
+                    
+                var displayWord = function() {
+                    
+                    var resultWord = oldWord;
+                      
+                    myauthor.innerHTML = resultWord;
+                    myequals.setAttribute("data-myresult", resultWord);
+
+                    oldWord = 0;
+                    currentWord = resultWord;
+
+                  };
+                    
+                var clearAllLetters = function() {
+                    oldWord = "";
+                    currentWord = "";
+                    myauthor.innerHTML = "0";
+                    myequals.setAttribute("data-myresult", resultWord);
+                };
+                                      
+                for (var i =  0, l = myletter.length; i < l; i++) {
+                    myletter[i].onclick = setWord;
+                }
+                                      
+                for (var i =  0, l = myequals.length; i < l; i++) {
+                    myequals[i].onclick = moveWord;
+                }
+
+                myequals.onclick = displayWord;
+
+                el("#myclear").onclick = clearAllLetters;
+                   
+            }());
+            
+        </script>
+        
+        <br><br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        
+        <!-- Footer -->
+            
+        <div class="footer">
+            
+            <p>Copyright of Los Anguactes, Website produced by פלג with the permission of Página 3 and Desahogarse</p>
+            
+        </div>
+        
+    </body>
+</html>

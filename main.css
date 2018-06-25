@@ -1,0 +1,294 @@
+html {
+    background-color: aqua;
+    text-align: center;
+    font-family: cursive;
+}
+
+body {
+    text-align: center;
+}
+
+.box {
+    text-align: left;
+    width: auto;
+    height: auto;
+    background-color: white;    
+}
+
+.container {
+    position: relative;
+}
+
+.center {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    color: blue;
+}
+
+img { 
+    width: 100%;
+    height: 100%;
+}
+
+.tictactoe canvas {
+    position:relative;
+    -webkit-animation:canvasAnimation 5s;
+}
+
+@-webkit-keyframes canvasAnimation {
+    0%   {-webkit-transform:rotate(90deg);left:0px; top:0px;}
+}
+
+@-webkit-keyframes h1Animation {
+    0%   {-webkit-transform:rotate(0deg)}
+    25%   {-webkit-transform:rotate(90deg)}
+    50%  {-webkit-transform:rotate(180deg)}
+    75%  {-webkit-transform:rotate(270deg)}
+    100%  { -webkit-transform:rotate(360deg)}
+}
+
+@-webkit-keyframes h2Animation {
+    0%   {-webkit-transform: scale(1,2);}
+    25%   {-webkit-transform: scale(2,3);}
+    50%  {-webkit-transform: scale(3,4);}
+    75%  {-webkit-transform: scale(4,5);}
+    100%  { -webkit-transform: scale(0,0);}
+}
+
+@-webkit-keyframes h3Animation{ 
+    0%   {-webkit-transform: scale(0,0);}
+    50% {-webkit-transform: scale(0,0);}
+    100%  {-webkit-transform: scale(100,100);}
+}
+
+body {
+    margin: 0;
+    padding: 5em 0 2em;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 300;
+    margin: 0;
+    color: deeppink;
+}
+
+h3 {
+    color: darkred;
+}
+
+.calculator {
+    font-size: 28px;
+    margin: 0 auto;
+    width: 10em;
+
+    &::before,
+    &::after {
+        content: " ";
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+.viewer {
+    float: left;
+    line-height: 3em;
+    text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 7.5em;
+    height: 3em;
+}
+
+button {
+    border: 0;
+    background: rgb(42,50,113);
+    color: magenta;
+    cursor: pointer;
+    float: left;
+    font: inherit;
+    margin: 0.25em;
+    width: 2em;
+    height: 2em;
+}
+
+#superdupermola {
+    background-color: aqua;
+    color: aqua;
+}
+
+#superdupermola:hover {
+    background-color: rgb(42,50,113);
+    color: magenta;
+}
+
+.nav {
+    overflow: hidden;
+    background-color: indigo;
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    background: linear-gradient(cyan, blue, purple)
+}
+
+.nav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 17px;
+}
+
+.nav a:hover {
+    background-color: purple;
+}
+
+.nac a.active {
+    background-color: deeppink;
+}
+
+p {
+    color: darkblue;
+    text-align: center;
+    font-size: 18px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-image: linear-gradient(
+        to right,
+        red, orange, yellow, green, cyan, blue, purple, pink
+    );
+}
+
+.footer p {
+    color: beige;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black
+}
+
+.count_up_timer {
+    font-size: 22px;
+    color: lawngreen;
+}
+
+.center_counter {
+    position: absolute;
+    top: 2250px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: cursive;
+}
+
+.count_down_stopper {
+    font-size: 28px;
+    margin: 0 auto;
+    width: 10.5em;
+    display: table;
+
+    &::before,
+    &::after {
+        content: " ";
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
+
+.stopperDisplay {
+    position: relative;
+    font-size: 28px;
+    float: left;
+    line-height: 3em;
+    text-align: right;
+    width: 6em;
+    height: 3em;   
+    color: goldenrod;
+}
+
+.up {
+    width: 5em;
+    height: 2em;
+}
+
+.down {
+    width: 5em;
+    height: 2em;
+}
+
+.pause {
+    width: 5em;
+}
+
+.starter {
+    width: 5em;
+}
+
+.restart {
+    width: 10.5em;
+}
+
+.count_down_stopper button {
+    background: rgb(0, 255, 0);
+    color: darkgreen;
+}
+
+.carGame canvas {
+    border: 5px solid darkblue;
+    background-color: azure;
+    position: absolute;
+    left: 30%;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlNOmw5Ip6PM46RIZDWoPqMeu2tJ23rWBcfBRZkqeonLe1mMUb");
+    background-size: 100%;
+}
+
+.carGame button {
+    width: 5em;
+    position: absolute;
+    left: 46%;
+}
+
+.startawesomeness {
+    position: absolute;
+    left: 46%;
+    width: 5em;
+}
+
+.carbuttons {
+    width: 5em;
+    position: absolute;
+    left: 46%;   
+}
+
+#clockcanvas {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+.Gimatria {
+    font-size: 28px;
+    margin: 0 auto;
+    width: 17.5em;
+
+    &::before,
+    &::after {
+        content: " ";
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+    }
+}
